@@ -14,8 +14,10 @@ cloudinary
 pytest
 pytest-asyncio
 pytest-cov
-httpx
+httpx==0.23.3
 redis>=4.5.0
 itsdangerous
 sphinx
 sphinx-autodoc-typehints
+asgi-lifespan
+trio

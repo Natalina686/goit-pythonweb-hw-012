@@ -58,7 +58,7 @@ class ContactResponse(ContactBase):
     id: int
 
     class Config:
-        from_attributes = True
+        orm_mode = True
 
 class UserCreate(BaseModel):
     """
@@ -87,11 +87,14 @@ class UserResponse(BaseModel):
     id: int
     email: EmailStr
     full_name: Optional[str]
-    is_verified: bool
-    avatar_url: Optional[str]
+    is_verified: bool = False
+    is_active: bool = True
+    role: str = "user"
+    avatar_url: Optional[str] = None
 
     class Config:
-        from_attributes = True
+        orm_mode = True
+
 
 class Token(BaseModel):
     """
