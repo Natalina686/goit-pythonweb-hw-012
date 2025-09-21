@@ -15,7 +15,7 @@ pytest
 pytest-asyncio
 pytest-cov
 httpx
-aioredis
+redis>=4.5.0
 itsdangerous
 sphinx
 sphinx-autodoc-typehints
