@@ -14,6 +14,22 @@ async def get_current_user(
     token: str = Depends(oauth2_scheme),
     db: Session = Depends(get_db)
 ):
+    """
+    Get the current authenticated user based on JWT token.
+
+    This function decodes the JWT token, retrieves the user from cache (Redis)
+    or database, and returns a dictionary representing the user.
+
+    Args:
+        token (str): JWT token from the request Authorization header.
+        db (Session): SQLAlchemy database session.
+
+    Raises:
+        HTTPException: If the token is invalid (401) or user not found (404).
+
+    Returns:
+        dict: User information including id, email, role, and avatar URL.
+    """
     try:
         payload = jwt.decode(
             token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM]

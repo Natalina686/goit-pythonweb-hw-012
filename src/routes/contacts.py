@@ -15,6 +15,17 @@ def create_contact(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
 ):
+    """
+    Create a new contact for the current user.
+
+    Args:
+        contact (schemas.ContactCreate): Contact creation data.
+        db (Session): Database session.
+        current_user (User): Authenticated user.
+
+    Returns:
+        schemas.ContactResponse: The created contact.
+    """
     return crud.create_contact(db, contact, owner_id=current_user.id)
 
 
@@ -26,6 +37,19 @@ def get_contacts(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
+    """
+    Get a list of contacts for the current user, optionally filtered by search query.
+
+    Args:
+        q (Optional[str]): Search string for first name, last name, or email.
+        skip (int): Number of records to skip.
+        limit (int): Maximum number of records to return.
+        db (Session): Database session.
+        current_user (User): Authenticated user.
+
+    Returns:
+        List[schemas.ContactResponse]: List of matching contacts.
+    """
     return crud.search_contacts(db, owner_id=current_user.id, q=q, skip=skip, limit=limit)
 
 
@@ -35,6 +59,20 @@ def get_contact(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
 ):
+    """
+    Get a single contact by ID for the current user.
+
+    Args:
+        contact_id (int): ID of the contact.
+        db (Session): Database session.
+        current_user (User): Authenticated user.
+
+    Raises:
+        HTTPException: 404 if contact is not found.
+
+    Returns:
+        schemas.ContactResponse: The requested contact.
+    """
     obj = crud.get_contact(db, contact_id, owner_id=current_user.id)
     if not obj:
         raise HTTPException(status_code=404, detail="Contact not found")
@@ -48,6 +86,21 @@ def update_contact(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
 ):
+    """
+    Update an existing contact for the current user.
+
+    Args:
+        contact_id (int): ID of the contact to update.
+        contact (schemas.ContactUpdate): Data to update.
+        db (Session): Database session.
+        current_user (User): Authenticated user.
+
+    Raises:
+        HTTPException: 404 if contact is not found.
+
+    Returns:
+        schemas.ContactResponse: Updated contact.
+    """
     obj = crud.update_contact(db, contact_id, contact, owner_id=current_user.id)
     if not obj:
         raise HTTPException(status_code=404, detail="Contact not found")
@@ -60,6 +113,20 @@ def delete_contact(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
 ):
+    """
+    Delete a contact for the current user.
+
+    Args:
+        contact_id (int): ID of the contact to delete.
+        db (Session): Database session.
+        current_user (User): Authenticated user.
+
+    Raises:
+        HTTPException: 404 if contact is not found.
+
+    Returns:
+        None
+    """
     ok = crud.delete_contact(db, contact_id, owner_id=current_user.id)
     if not ok:
         raise HTTPException(status_code=404, detail="Contact not found")
@@ -72,5 +139,16 @@ def get_birthdays(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
 ):
+    """
+    Get contacts with birthdays in the next given number of days.
+
+    Args:
+        days (int): Number of days to look ahead for birthdays.
+        db (Session): Database session.
+        current_user (User): Authenticated user.
+
+    Returns:
+        List[schemas.ContactResponse]: Contacts with upcoming birthdays.
+    """
     contacts = crud.get_upcoming_birthdays(db, days=days)
     return [c for c in contacts if c.owner_id == current_user.id]

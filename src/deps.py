@@ -9,7 +9,20 @@ from src.settings import settings
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
 
 
-def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
+def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)) -> models.User:
+    """
+    Retrieve the currently authenticated user based on the JWT token.
+
+    Args:
+        token (str): JWT access token extracted from Authorization header.
+        db (Session): Database session.
+
+    Raises:
+        HTTPException: 401 Unauthorized if token is invalid or user not found.
+
+    Returns:
+        models.User: Authenticated user object from the database.
+    """
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",
