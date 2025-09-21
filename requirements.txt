@@ -11,4 +11,11 @@ passlib[bcrypt]
 python-jose[cryptography]
 python-multipart
 cloudinary
-
+pytest
+pytest-asyncio
+pytest-cov
+httpx
+aioredis
+itsdangerous
+sphinx
+sphinx-autodoc-typehints

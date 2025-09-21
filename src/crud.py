@@ -79,6 +79,10 @@ def get_upcoming_birthdays(db: Session, days: int = 7) -> List[models.Contact]:
 def get_user_by_email(db: Session, email: str) -> Optional[models.User]:
     return db.query(models.User).filter(models.User.email == email).first()
 
+def get_user_by_id(db: Session, user_id: int) -> Optional[models.User]:
+    return db.query(models.User).filter(models.User.id == user_id).first()
+
+
 def create_user(db: Session, user_in: schemas.UserCreate) -> models.User:
     existing_user = get_user_by_email(db, user_in.email)
     if existing_user:
