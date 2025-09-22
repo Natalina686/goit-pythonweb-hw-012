@@ -20,4 +20,3 @@ itsdangerous
 sphinx
 sphinx-autodoc-typehints
 asgi-lifespan
-trio

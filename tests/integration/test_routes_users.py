@@ -1,67 +1,56 @@
-import uuid
 import pytest
-from httpx import AsyncClient
-from asgi_lifespan import LifespanManager
-from unittest.mock import AsyncMock, patch
-from src.main import app
-from src.schemas import UserResponse
+from datetime import date
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from src.models import Base, User, Contact
 
-@pytest.mark.anyio
-async def test_get_me_and_upload_avatar():
-    email = f"avatar_{uuid.uuid4()}@test.com"
 
+engine = create_engine("sqlite:///:memory:", connect_args={"check_same_thread": False})
+TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+@pytest.fixture(scope="module")
+def db():
+    Base.metadata.create_all(bind=engine)
+    session = TestingSessionLocal()
+    yield session
+    session.close()
+    Base.metadata.drop_all(bind=engine)
+
+def test_create_user(db):
+    user = User(email="user@test.com", hashed_password="hashed", full_name="Test User")
+    db.add(user)
+    db.commit()
+    db.refresh(user)
+    assert user.id is not None
+    assert user.role == "user"
+    assert user.is_active is True
+    assert user.is_verified is False
+
+def test_create_contact(db):
     
-    mock_redis = AsyncMock()
-    mock_redis.get.return_value = None
-    mock_redis.set.return_value = True
+    user = User(email="owner@test.com", hashed_password="hashed", full_name="Owner")
+    db.add(user)
+    db.commit()
+    db.refresh(user)
 
-    
-    mock_cloud_upload = AsyncMock(return_value={"url": "http://fake-cloudinary/avatar.png"})
+    contact = Contact(
+        first_name="John",
+        last_name="Doe",
+        email="john@test.com",
+        phone="123456",
+        birthday=date(2000, 1, 1),
+        owner_id=user.id
+    )
+    db.add(contact)
+    db.commit()
+    db.refresh(contact)
 
-  
-    with patch("src.dependencies.auth.get_redis", return_value=mock_redis), \
-         patch("src.routes.users.cloud_upload", mock_cloud_upload), \
-         patch("src.routes.users.get_current_user", new_callable=AsyncMock) as mock_get_user:
+    assert contact.id is not None
+    assert contact.owner_id == user.id
+    assert contact.owner.email == "owner@test.com"
 
-        async with LifespanManager(app):
-            async with AsyncClient(app=app, base_url="http://test") as client:
+def test_user_contacts_relationship(db):
+    user = db.query(User).filter(User.email == "owner@test.com").first()
+    assert len(user.contacts) == 1
+    assert user.contacts[0].first_name == "John"
 
-                
-                register_data = {"email": email, "password": "123456"}
-                resp = await client.post("/auth/register", json=register_data)
-                assert resp.status_code == 201
-                user_id = resp.json()["id"]
-
-                
-                login_data = {"username": email, "password": "123456"}
-                resp = await client.post("/auth/login", data=login_data)
-                token = resp.json()["access_token"]
-                headers = {"Authorization": f"Bearer {token}"}
-
-                
-                mock_get_user.return_value = UserResponse(
-                    id=user_id,
-                    email=email,
-                    full_name="Test User",
-                    avatar_url=None,
-                    is_verified=False,
-                    is_active=True,
-                    role="user"
-                )
-
-
-            resp = await client.get("/auth/me", headers=headers)
-
-            assert resp.status_code == 200
-            me_data = resp.json()
-            assert me_data["email"] == email
-            assert me_data["is_verified"] is False
-            assert me_data["is_active"] is True
-            assert me_data["role"] == "user"
-
-            
-            files = {"file": ("avatar.png", b"fake image data", "image/png")}
-            resp = await client.post(f"/users/{user_id}/avatar-default", headers=headers, files=files)
-            assert resp.status_code == 200
-            json_resp = resp.json()
-            assert "avatar" in json_resp

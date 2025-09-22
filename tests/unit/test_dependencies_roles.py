@@ -9,7 +9,8 @@ class DummyUser:
 import asyncio
 import pytest
 
-@pytest.mark.asyncio
+@pytest.mark.anyio("asyncio")
+
 async def test_admin_required():
     admin_user = {"role": "admin"}
     result = await admin_required(admin_user)
@@ -18,3 +19,6 @@ async def test_admin_required():
     normal_user = {"role": "user"}
     with pytest.raises(HTTPException):
         await admin_required(normal_user)
+
+
+
