@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>&lt;no title&gt; &#8212; MyContactsApp 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=2709fde1"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <p>ContactsApp Documentation</p>
+<div class="toctree-wrapper compound">
+</div>
+<p>Modules</p>
+<p id="module-crud">MagicMock is a subclass of Mock with default implementations
+of most of the magic methods. You can use MagicMock without having to
+configure the magic methods yourself.</p>
+<p>If you use the <cite>spec</cite> or <cite>spec_set</cite> arguments then <em>only</em> magic
+methods that exist in the spec will be created.</p>
+<p>Attributes and the return value of a <cite>MagicMock</cite> will also be <cite>MagicMocks</cite>.</p>
+<p id="module-models">MagicMock is a subclass of Mock with default implementations
+of most of the magic methods. You can use MagicMock without having to
+configure the magic methods yourself.</p>
+<p>If you use the <cite>spec</cite> or <cite>spec_set</cite> arguments then <em>only</em> magic
+methods that exist in the spec will be created.</p>
+<p>Attributes and the return value of a <cite>MagicMock</cite> will also be <cite>MagicMocks</cite>.</p>
+<p id="module-routes.auth">MagicMock is a subclass of Mock with default implementations
+of most of the magic methods. You can use MagicMock without having to
+configure the magic methods yourself.</p>
+<p>If you use the <cite>spec</cite> or <cite>spec_set</cite> arguments then <em>only</em> magic
+methods that exist in the spec will be created.</p>
+<p>Attributes and the return value of a <cite>MagicMock</cite> will also be <cite>MagicMocks</cite>.</p>
+<p id="module-routes.contacts">MagicMock is a subclass of Mock with default implementations
+of most of the magic methods. You can use MagicMock without having to
+configure the magic methods yourself.</p>
+<p>If you use the <cite>spec</cite> or <cite>spec_set</cite> arguments then <em>only</em> magic
+methods that exist in the spec will be created.</p>
+<p>Attributes and the return value of a <cite>MagicMock</cite> will also be <cite>MagicMocks</cite>.</p>
+<p id="module-routes.users">MagicMock is a subclass of Mock with default implementations
+of most of the magic methods. You can use MagicMock without having to
+configure the magic methods yourself.</p>
+<p>If you use the <cite>spec</cite> or <cite>spec_set</cite> arguments then <em>only</em> magic
+methods that exist in the spec will be created.</p>
+<p>Attributes and the return value of a <cite>MagicMock</cite> will also be <cite>MagicMocks</cite>.</p>
+<p id="module-schemas">MagicMock is a subclass of Mock with default implementations
+of most of the magic methods. You can use MagicMock without having to
+configure the magic methods yourself.</p>
+<p>If you use the <cite>spec</cite> or <cite>spec_set</cite> arguments then <em>only</em> magic
+methods that exist in the spec will be created.</p>
+<p>Attributes and the return value of a <cite>MagicMock</cite> will also be <cite>MagicMocks</cite>.</p>
+<dl class="py function" id="module-security">
+<dt class="sig sig-object py" id="security.create_access_token">
+<span class="sig-prename descclassname"><span class="pre">security.</span></span><span class="sig-name descname"><span class="pre">create_access_token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expires_delta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">timedelta</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/security.html#create_access_token"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#security.create_access_token" title="Link to this definition">¶</a></dt>
+<dd><p>Create a JWT access token.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>dict</em>) – Data to encode in the token (e.g., user ID).</p></li>
+<li><p><strong>expires_delta</strong> (<em>timedelta</em><em>, </em><em>optional</em>) – Expiration time for the token.
+Defaults to ACCESS_TOKEN_EXPIRE_MINUTES if not provided.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Encoded JWT token.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="security.get_password_hash">
+<span class="sig-prename descclassname"><span class="pre">security.</span></span><span class="sig-name descname"><span class="pre">get_password_hash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/security.html#get_password_hash"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#security.get_password_hash" title="Link to this definition">¶</a></dt>
+<dd><p>Hash a plain password using bcrypt.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>password</strong> (<em>str</em>) – Plain text password.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Hashed password.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="security.verify_password">
+<span class="sig-prename descclassname"><span class="pre">security.</span></span><span class="sig-name descname"><span class="pre">verify_password</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plain_password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hashed_password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/security.html#verify_password"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#security.verify_password" title="Link to this definition">¶</a></dt>
+<dd><p>Verify that a plain password matches a hashed password.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>plain_password</strong> (<em>str</em>) – Password provided by the user.</p></li>
+<li><p><strong>hashed_password</strong> (<em>str</em>) – Hashed password stored in the database.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the password matches, False otherwise.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p id="module-settings">MagicMock is a subclass of Mock with default implementations
+of most of the magic methods. You can use MagicMock without having to
+configure the magic methods yourself.</p>
+<p>If you use the <cite>spec</cite> or <cite>spec_set</cite> arguments then <em>only</em> magic
+methods that exist in the spec will be created.</p>
+<p>Attributes and the return value of a <cite>MagicMock</cite> will also be <cite>MagicMocks</cite>.</p>
+<p id="module-deps">MagicMock is a subclass of Mock with default implementations
+of most of the magic methods. You can use MagicMock without having to
+configure the magic methods yourself.</p>
+<p>If you use the <cite>spec</cite> or <cite>spec_set</cite> arguments then <em>only</em> magic
+methods that exist in the spec will be created.</p>
+<p>Attributes and the return value of a <cite>MagicMock</cite> will also be <cite>MagicMocks</cite>.</p>
+<p id="module-dependencies.auth">MagicMock is a subclass of Mock with default implementations
+of most of the magic methods. You can use MagicMock without having to
+configure the magic methods yourself.</p>
+<p>If you use the <cite>spec</cite> or <cite>spec_set</cite> arguments then <em>only</em> magic
+methods that exist in the spec will be created.</p>
+<p>Attributes and the return value of a <cite>MagicMock</cite> will also be <cite>MagicMocks</cite>.</p>
+<p id="module-dependencies.roles">MagicMock is a subclass of Mock with default implementations
+of most of the magic methods. You can use MagicMock without having to
+configure the magic methods yourself.</p>
+<p>If you use the <cite>spec</cite> or <cite>spec_set</cite> arguments then <em>only</em> magic
+methods that exist in the spec will be created.</p>
+<p>Attributes and the return value of a <cite>MagicMock</cite> will also be <cite>MagicMocks</cite>.</p>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">MyContactsApp</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, natalina686.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
